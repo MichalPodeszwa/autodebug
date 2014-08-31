@@ -13,7 +13,7 @@ Install it using ``pip install autodebug``.
 
 Then in your Python script, before the possible exception write
 
-    import auto_debug
+    import autodebug
  
 
 Then if any **uncaught** exception happens, you'll be immediately transferred to debugger.
