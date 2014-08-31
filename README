@@ -1,0 +1,46 @@
+Auto-Debugger
+==============
+
+Overview
+--------------
+
+This is a simple module which enables you to have automatic post-mortem debugging as simply as possible
+
+Usage
+--------------
+
+Install it using ``pip install autodebug``.
+
+Then in your Python script, before the possible exception write
+
+    import auto_debug
+ 
+
+Then if any **uncaught** exception happens, you'll be immediately transferred to debugger.
+Exactly the moment **before** the exception occured. So you'll have access to all variables and everything.
+
+Debugger
+--------------
+
+You can specify which Python debugger you want to use.
+
+To do that simply set the environmental variable ``AUTO_DEBUG``.
+Possible debuggers currently are:
+
+* ``pdb`` for built-in Python debugger
+* ``ipdb`` for ``ipdb`` Python debugger
+* ``pudb`` for full-screen console Python debugger.
+
+If you do not set the variable, ``pdb`` will be used, as it is built-in.
+
+Post notes
+--------------
+
+* Please note that this module uses custom ``sys.excepthook``, so if you are using your own, this module will not work, or will overwrite your ``excepthook`` 
+  (This depends on order of ``import`` and setting your own ``excepthook``)
+
+* In order to make it work with ``uwsgi`` you have to pass ``--honour-stdin`` to uwsgi configuration. This will make it possible to debug ``uwsgi`` applications!.
+  But keep in mind, that if you've got more than 1 worker, and multiple people are using your application, the terminal output will be ugly.
+
+* The debugger won't start if it is imported inside interactive console, so it may not work in some IDEs. Experiment yourself, however it is adviced to start your
+  programs using command line.
